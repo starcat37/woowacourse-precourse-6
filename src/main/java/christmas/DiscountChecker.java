@@ -15,7 +15,8 @@ public class DiscountChecker {
         discountResult.put(DiscountType.CHRISTMAS.getDescription(), checkChristmasDiscount(date));
         discountResult.put(DiscountType.WEEKDAY.getDescription(), checkWeekdayDiscount(date, menu));
         discountResult.put(DiscountType.WEEKEND.getDescription(), checkWeekendDiscount(date, menu));
-        discountResult.put(DiscountType.GIFT.getDescription(), giftcheck.giftcheck(calculator.calculateTotalMenu(menu)));
+        discountResult.put(DiscountType.STAR.getDescription(), checkStarDiscount(date));
+        discountResult.put(DiscountType.GIFT.getDescription(), giftcheck.giftcheck(calculator.calculateTotalMenu(menu)) * 25000);
 
         return discountResult;
     }
@@ -42,7 +43,7 @@ public class DiscountChecker {
             MenuItem menuItem = predefinedMenu.getItemByName(itemName);
 
             if (Objects.equals(menuItem.getCategory(), "디저트")) {
-                dessertCount += 1;
+                dessertCount += entry.getValue();
             }
         }
         return dessertCount * 2023;
@@ -67,5 +68,14 @@ public class DiscountChecker {
             }
         }
         return mainCount * 2023;
+    }
+
+    private int checkStarDiscount(int date) {
+        Validator validator = new Validator();
+        boolean isStar = validator.isStarDate(date);
+        if (!isStar) {
+            return 0;
+        }
+        return 1000;
     }
 }

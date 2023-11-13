@@ -83,4 +83,9 @@ public class Validator {
         List<Integer> weekends = Arrays.asList(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
         return weekends.contains(date);
     }
+
+    public boolean isStarDate(int date) {
+        List<Integer> stars = Arrays.asList(3, 10, 17, 24, 25, 31);
+        return stars.contains(date);
+    }
 }

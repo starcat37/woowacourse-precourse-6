@@ -33,18 +33,23 @@ public class Application {
 
         // 로직
         Discount discount = new Discount();
-        discount.discount(userDate, userMenu);
+        DiscountResult result = discount.discount(userDate, userMenu);
 
         // 출력
         OutputView outputView = new OutputView();
         System.out.printf("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n%n", userDate);
-        outputView.printMenu();
-        outputView.printTotalOrderAmount();
-        outputView.printGiftMenu();
-        outputView.printBenefit();
-        outputView.printTotalBenefitAmount();
-        outputView.printFinalMenuAmount();
-        outputView.printEventBadge();
-
+        outputView.printMenu(userMenu);
+        System.out.println();
+        outputView.printTotalOrderAmount(result.getTotalOrderAmount());
+        System.out.println();
+        outputView.printGiftMenu(result.getGiftMenu());
+        System.out.println();
+        outputView.printBenefit(result.getBenefit());
+        System.out.println();
+        outputView.printTotalBenefitAmount(result.getTotalBenefitAmount());
+        System.out.println();
+        outputView.printFinalMenuAmount(result.getFinalMenuAmount());
+        System.out.println();
+        outputView.printEventBadge(result.getEventBadge());
     }
 }

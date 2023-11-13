@@ -28,7 +28,10 @@ public class Calculator {
                 .sum();
     }
 
-    public int calculateTotalPayment(int totalMenu, int totalDiscount) {
+    public int calculateTotalPayment(int totalMenu, int totalDiscount, int giftMenu) {
+        if (giftMenu == 1) {
+            return totalMenu - totalDiscount + 25000;
+        }
         return totalMenu - totalDiscount;
     }
 }

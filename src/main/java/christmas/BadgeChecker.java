@@ -9,6 +9,6 @@ public class BadgeChecker {
         } else if (totalDiscount >= 5000) {
             return Badges.FIVE_THOUSAND_BADGE.getMessage();
         }
-        return null;
+        return "";
     }
 }
