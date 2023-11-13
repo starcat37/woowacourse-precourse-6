@@ -1,6 +1,7 @@
 package christmas;
 
 import java.nio.channels.Pipe;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -67,14 +68,19 @@ public class Validator {
         }
     }
 
-        public void isDuplicatedMenu(String string) {
-            Set<String> uniqueItems = new HashSet<>();
-            String[] items = string.split(",");
-            for (String item : items) {
-                String name = item.split("-")[0];
-                if (!uniqueItems.add(name)) {
-                    throw new IllegalArgumentException(ErrorMessages.MENU_ERROR.getMessage());
-                }
+    public void isDuplicatedMenu(String string) {
+        Set<String> uniqueItems = new HashSet<>();
+        String[] items = string.split(",");
+        for (String item : items) {
+            String name = item.split("-")[0];
+            if (!uniqueItems.add(name)) {
+                throw new IllegalArgumentException(ErrorMessages.MENU_ERROR.getMessage());
             }
         }
     }
+
+    public boolean isWeekendDate(int date) {
+        List<Integer> weekends = Arrays.asList(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
+        return weekends.contains(date);
+    }
+}
