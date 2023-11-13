@@ -9,11 +9,11 @@ public class Application {
 
         // 입력
         InputView inputView = new InputView();
-        int date = 0;
+        int userDate = 0;
         boolean validDate = false;
         while (!validDate) {
             try {
-                date = inputView.readDate();
+                userDate = inputView.readDate();
                 validDate = true;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -32,10 +32,19 @@ public class Application {
         }
 
         // 로직
-        System.out.println(date);
-        System.out.println(userMenu.get("티본스테이크"));
+        Discount discount = new Discount();
+        discount.discount(userDate, userMenu);
 
         // 출력
-        System.out.printf("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n%n", date);
+        OutputView outputView = new OutputView();
+        System.out.printf("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n%n", userDate);
+        outputView.printMenu();
+        outputView.printTotalOrderAmount();
+        outputView.printGiftMenu();
+        outputView.printBenefit();
+        outputView.printTotalBenefitAmount();
+        outputView.printFinalMenuAmount();
+        outputView.printEventBadge();
+
     }
 }
