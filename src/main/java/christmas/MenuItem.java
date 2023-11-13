@@ -11,7 +11,6 @@ public class MenuItem {
         this.price = price;
     }
 
-    // getter 메소드
     public String getCategory() {
         return category;
     }
