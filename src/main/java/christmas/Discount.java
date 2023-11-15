@@ -20,15 +20,15 @@ public class Discount {
         Map<String, Integer> Benefit = discountChecker.checkDiscount(date, menu);
 
         // Calculator: 혜택 적용 상황 반영한 총혜택 금액 구하기 V
-        int TotalBenefitAmount = calculator.calculateTotalDiscount(Benefit);
+        int totalBenefitAmount = calculator.calculateTotalDiscount(Benefit);
 
         // Calculator: 할인 후 예상 결제 금액 = (할인 전 총주문 금액) - (총혜택 금액) V
-        int FinalMenuAmount = calculator.calculateTotalPayment(totalOrderAmount, TotalBenefitAmount, giftMenu);
+        int finalMenuAmount = calculator.calculateTotalPayment(totalOrderAmount, totalBenefitAmount, giftMenu);
 
         // BadgeChecker: 총혜택 금액에 따라 12월 이벤트 배지 조건 확인하기 V
-        String EventBadge = badgeChecker.badgeCheck(TotalBenefitAmount);
+        String EventBadge = badgeChecker.badgeCheck(totalBenefitAmount);
 
         // DiscountResult 객체 생성 및 반환
-        return new DiscountResult(totalOrderAmount, giftMenu, Benefit, TotalBenefitAmount, FinalMenuAmount, EventBadge);
+        return new DiscountResult(totalOrderAmount, giftMenu, Benefit, totalBenefitAmount, finalMenuAmount, EventBadge);
     }
 }
