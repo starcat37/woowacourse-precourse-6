@@ -24,6 +24,8 @@ public class InputView {
         // 검증 로직
         Validator validator = new Validator();
         validator.isMenu(menu);
+        validator.isAllDrinks(menu);
+        validator.isCountLessThanTwenty(menu);
 
         return (HashMap<String, Integer>) menu;
     }
