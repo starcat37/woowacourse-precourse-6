@@ -50,10 +50,10 @@ public class ValidatorTest {
     }
 
     @Test
-    void 메뉴_유효성_검사_음수_또는_0_수량() {
+    void 메뉴_유효성_검사_양수_아님() {
         Map<String, Integer> negativeQuantityMenu = new HashMap<>();
-        negativeQuantityMenu.put("음식1", -1);
-        assertThrows(IllegalArgumentException.class, () -> validator.isMenu(negativeQuantityMenu), "음수 또는 0의 수량은 IllegalArgumentException 발생");
+        negativeQuantityMenu.put("초코케이크", -1);
+        assertThrows(IllegalArgumentException.class, () -> validator.isMenu(negativeQuantityMenu), "양수가 아닌 수량은 IllegalArgumentException 발생");
     }
 
     // isProperForm 메소드 테스트
