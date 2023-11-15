@@ -88,4 +88,25 @@ public class Validator {
         List<Integer> stars = Arrays.asList(3, 10, 17, 24, 25, 31);
         return stars.contains(date);
     }
+
+    public boolean isMoreThanTenThousand(int totalOrderAmount) {
+        return totalOrderAmount >= 10000;
+    }
+
+    public void isAllDrinks(Map<String, Integer> menu) {
+        Menu predefinedMenu = new Menu();
+
+        if (menu.keySet().stream()
+                .map(predefinedMenu::getItemByName)
+                .allMatch(item -> "음료".equals(item.getCategory()))) {
+            throw new IllegalArgumentException(ErrorMessages.MENU_ERROR.getMessage());
+        };
+    }
+
+    public void isCountLessThanTwenty(Map<String, Integer> menu) {
+        int size = menu.size();
+        if (size <= 20) {
+            throw new IllegalArgumentException(ErrorMessages.MENU_ERROR.getMessage());
+        };
+    }
 }
