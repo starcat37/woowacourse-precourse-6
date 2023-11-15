@@ -1,5 +1,6 @@
 package christmas;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,7 +9,14 @@ import java.util.Map;
 
 public class ValidatorTest {
 
-    private final Validator validator = new Validator();
+    private Validator validator;
+    private HashMap<String, Integer> menu;
+
+    @BeforeEach
+    void setUp() {
+        validator = new Validator();
+        menu = new HashMap<>();
+    }
 
     // isDate 메소드 테스트
     @Test
@@ -91,4 +99,48 @@ public class ValidatorTest {
     void 별_날짜_검사_비별_날짜() {
         assertFalse(validator.isStarDate(4), "별이 아닌 날짜는 false 반환");
     }
+
+    // isMoreThanTenThousand 메소드 테스트
+    @Test
+    void isMoreThanTenThousand_이상() {
+        assertTrue(validator.isMoreThanTenThousand(10000));
+    }
+
+    @Test
+    void isMoreThanTenThousand_미만() {
+        assertFalse(validator.isMoreThanTenThousand(9999));
+    }
+
+    // isAllDrinks 메소드 테스트
+    @Test
+    void isAllDrinks_모든_음료() {
+        menu.put("제로콜라", 1);
+        menu.put("레드와인", 2);
+        assertThrows(IllegalArgumentException.class, () -> validator.isAllDrinks(menu));
+    }
+
+    @Test
+    void isAllDrinks_음료_아님() {
+        menu.put("제로콜라", 1);
+        menu.put("타파스", 2);
+        assertDoesNotThrow(() -> validator.isAllDrinks(menu));
+    }
+
+    @Test
+    void isCountLessThanTwenty_이하() {
+        for (int i = 0; i < 20; i++) {
+            menu.put("메뉴" + i, 1);
+        }
+        assertThrows(IllegalArgumentException.class, () -> validator.isCountLessThanTwenty(menu));
+    }
+
+    @Test
+    void isCountLessThanTwenty_초과() {
+        for (int i = 0; i < 21; i++) {
+            menu.put("메뉴" + i, 1);
+        }
+        assertDoesNotThrow(() -> validator.isCountLessThanTwenty(menu));
+    }
+
+
 }
