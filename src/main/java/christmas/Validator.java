@@ -95,17 +95,16 @@ public class Validator {
 
     public void isAllDrinks(Map<String, Integer> menu) {
         Menu predefinedMenu = new Menu();
-
         if (menu.keySet().stream()
                 .map(predefinedMenu::getItemByName)
-                .allMatch(item -> "음료".equals(item.getCategory()))) {
+                .allMatch(item -> item != null && "음료".equals(item.getCategory()))) {
             throw new IllegalArgumentException(ErrorMessages.MENU_ERROR.getMessage());
         };
     }
 
     public void isCountLessThanTwenty(Map<String, Integer> menu) {
         int size = menu.size();
-        if (size <= 20) {
+        if (size > 20) {
             throw new IllegalArgumentException(ErrorMessages.MENU_ERROR.getMessage());
         };
     }
