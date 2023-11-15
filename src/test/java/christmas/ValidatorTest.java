@@ -127,19 +127,19 @@ public class ValidatorTest {
     }
 
     @Test
-    void isCountLessThanTwenty_이하() {
-        for (int i = 0; i < 20; i++) {
+    void isCountLessThanTwenty_미만() {
+        for (int i = 1; i < 21; i++) {
             menu.put("메뉴" + i, 1);
         }
-        assertThrows(IllegalArgumentException.class, () -> validator.isCountLessThanTwenty(menu));
+        assertDoesNotThrow(() -> validator.isCountLessThanTwenty(menu));
     }
 
     @Test
     void isCountLessThanTwenty_초과() {
-        for (int i = 0; i < 21; i++) {
+        for (int i = 1; i < 22; i++) {
             menu.put("메뉴" + i, 1);
         }
-        assertDoesNotThrow(() -> validator.isCountLessThanTwenty(menu));
+        assertThrows(IllegalArgumentException.class, () -> validator.isCountLessThanTwenty(menu));
     }
 
 
